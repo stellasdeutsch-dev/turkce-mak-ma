@@ -1655,6 +1655,9 @@ $('#again').onclick=function(){renderTasks();$('#practice').scrollIntoView({beha
 $$('video[data-src]').forEach(function(v){
   once(v,function(){v.poster=v.dataset.poster;v.src=v.dataset.src},0,'900px 0px');
   whenVisible(v,function(){if(v.src){var p=v.play();if(p&&p.catch)p.catch(function(){})}},function(){v.pause()},.3);
+  function near(){var r=v.getBoundingClientRect();if(r.top<innerHeight+900&&r.bottom>-900){if(!v.getAttribute('src')){v.poster=v.dataset.poster;v.src=v.dataset.src}
+    if(r.top<innerHeight&&r.bottom>0&&v.paused){var p=v.play();if(p&&p.catch)p.catch(function(){})}}}
+  addEventListener('scroll',near,{passive:true});
 });
 
 /* ---------- GSAP layer ---------- */
